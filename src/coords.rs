@@ -281,12 +281,8 @@ Computes the azimuth from equatorial coordinates
 * `observer_lat`: Observer's geographical latitude *| in radians*
 **/
 pub fn az_frm_eq(hour_angle: f64, dec: f64, observer_lat: f64) -> f64 {
-
-    hour_angle.sin().atan2 (
-        hour_angle.cos()  * observer_lat.sin()
-      - dec.tan() * observer_lat.cos()
-    )
-
+    -((hour_angle.sin() * dec.cos())
+        .atan2(dec.sin() * observer_lat.cos() - hour_angle.cos() * observer_lat.sin() * dec.cos()))
 }
 
 /**
